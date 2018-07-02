@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "05" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box5">
+            <button id="start">开启定时器</button>
+            <button id="stop">结束定时器</button>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+       /*
+       * 再常见的网页中有很多效果都是自己运动的，比如：轮播图、获取验证码倒计时
+       * 基本语法  window.setInterval(“执行代码串”，间隔时间)
+       */
+       var height = 150;
+       var timer = null;
+       $("start").onclick = function(){
+           timer = setInterval(function(){
+               height += 1;
+               console.log("身高是"+height+"cm");
+           },3000)
+       };
+       $("stop").onclick = function(){
+           clearInterval(timer);
+       }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

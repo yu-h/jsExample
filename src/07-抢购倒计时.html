@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "07" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box7">
+
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+       /*
+       * 实现思路：1、统一把时间转换为毫秒，会更加精准。
+       *           2、用将来时间-现在时间=剩余时间。
+       *           3、相同代码统一封装
+       *
+       */
+        var time = $("box7");
+        //自定义将来时间
+       var nextDate = new Date("2018/07/01 10:00:00");
+       //开启定时器
+       setInterval(function(){
+           //获取现在的时间
+           var currentDate = new Date();
+           //获取时间错
+           var currentTime = currentDate.getTime();
+           var nextTime = nextDate.getTime();
+           //剩余的时间戳
+           var allTime = nextTime - currentTime;
+           //把毫秒转成秒
+           var allSecond = parseInt(allTime/1000);
+           //转换
+           var d = size(parseInt(allSecond / 3600 / 24));
+           var h = size(parseInt(allSecond / 3600 % 24));
+           var m = size(parseInt(allSecond / 60 % 60));
+           var s = size(parseInt(allSecond % 60));
+           //注入
+           time.innerText = "距离抢购时间还有"+ d +"天"+ h +"时"+ m +"分"+ s +"秒"
+       },1000);
+       function size(num){
+           return num >= 10 ? num : "0" + num;
+       }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

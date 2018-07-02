@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "14" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box14">
+            <div class="left">
+                <ul>
+                    <li class="active">美食1</li>
+                    <li>美食2</li>
+                </ul>
+            </div>
+            <div class="center">
+                <img src="dist/img/1.jpg" alt="">
+                <img src="dist/img/2.jpg" alt="">
+                <img src="dist/img/3.jpg" alt="">
+                <img src="dist/img/4.jpg" alt="">
+            </div>
+            <div class="right">
+                <ul>
+                    <li>美食3</li>
+                    <li>美食4</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 缓动公式：起始值 += （结束值 - 起始值）* 缓动系数；
+        *
+        * */
+        //1、拿到需要的标签
+       var allLis = document.getElementsByTagName("li");
+       var allImgs = document.getElementsByTagName("img");
+
+       //2、索引
+       var loop = 0;
+
+       //3、定时器
+       setInterval(function(){
+           loop += 1;
+           loop %= 4;
+           for (var i = 0; i < allLis.length; i++){
+               allLis[i].className = "";
+               allImgs[i].style.display = "none";
+           }
+           allLis[loop].className = "active";
+           allImgs[loop].style.display = "block";
+       },3000)
+
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

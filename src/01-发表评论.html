@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "01" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box1">
+            <div class="box-top">
+                <lable>发表评论</lable>
+                <textarea id="textarea" cols="60" rows="10"></textarea>
+                <button id="btn">发布</button>
+            </div>
+            <ul id="ul">
+                <!--<li>浸提阿尼安琪 <a href="#">删除</a></li>-->
+            </ul>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+    window.onload = function(){
+        $("btn").onclick = function(){
+            //1、获取类容
+            var content = $("textarea").value;
+            // console.log(content);
+            //2、判断
+            if (content === "" || content.length === 0){
+                alert("请输入内容~~~~");
+                return;
+            }
+            //3、创建li并插入ul
+            var li = document.createElement("li");
+            li.innerHTML = content + '<a href="javascript:;">删除</a>';
+            // $("ul").appendChild(li);
+            $("ul").insertBefore(li,$("ul").children[0]);
+            //4、清除
+            $("textarea").value = "";
+            // console.log(content);
+            //5、删除
+            var as = $("ul").getElementsByTagName("a");
+            for (var i = 0;i < as.length; i++) {
+                // var a = as[i];
+                as[i].onclick = function(){
+                    this.parentNode.remove();
+                }
+            }
+        }
+    }
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

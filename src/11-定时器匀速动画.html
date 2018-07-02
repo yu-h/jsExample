@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "11" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box11">
+            <button id="btn">开始运动</button>
+            <div id="box11-box"></div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 定时器先清除、，在开启
+        * 定义一个步长
+        * */
+        var timer = null, begin = 0, step = 10, target = 688;
+        $("btn").onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                begin += step;
+                if (begin >= target){
+                    begin = target;
+                    clearInterval(timer);
+                }
+                console.log(begin);
+                $("box11-box").style.marginLeft = begin + "px";
+            },100)
+        }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

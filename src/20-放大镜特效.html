@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "20" })
+    <style>
+        img{
+            vertical-align: top;
+        }
+        #box20{
+            width: 400px;
+            height: 400px;
+            position: relative;
+        }
+        #s_box{
+            width: 100%;
+            height: 100%;
+            border: 1px solid #007fff;
+            position: relative;
+        }
+        #s_box img{
+            width: 400px;
+            height: 400px;
+        }
+        #mask{
+            width: 100px;
+            height: 100px;
+            background: rgba(255,255,0,0.4);
+            position: absolute;
+            left: 0;
+            top: 0;
+            cursor: move;
+            display: none;
+        }
+        #b_box{
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top: 0;
+            left: 404px;
+            border: 1px solid #007fff;
+            display: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+        #b_box img{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #list{
+            margin-top: 20px;
+        }
+        #list img{
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="box20">
+    <div id="s_box">
+        <img src="dist/img/s-1.jpg" alt="">
+        <span id="mask"></span>
+    </div>
+    <div id="b_box">
+        <img src="dist/img/b-1.jpg" alt="">
+    </div>
+</div>
+<div id="list">
+    <img src="dist/img/s-01.jpg" alt="">
+    <img src="dist/img/s-02.jpg" alt="">
+    <img src="dist/img/s-03.jpg" alt="">
+</div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+    window.onload = function () {
+        /*
+        *screenX screenY ——是以屏幕为基准进行测量
+        *pageX  pageY ——是以当前文档（绝对定位）为基准，不适用于ie6-8。
+        *clientX clientY ——是以当前可视区域为基准，类似于固定定位。
+        */
+        var box = $("box20");
+        var s_box = $("s_box");
+        var mask = $("mask");
+        var b_box = $("b_box");
+        var b_img = b_box.children[0];
+        var list = $("list");
+        var list_img = list.children;
+
+        //监听鼠标进入小盒子
+        s_box.onmouseover = function(){
+            mask.style.display = "block";
+            b_box.style.display = "block";
+            //监听鼠标的移动
+             s_box.onmousemove = function(event){
+                 var e = event || window.event;
+                 //求出鼠标的坐标
+                 var pointX = e.clientX - s_box.offsetParent.offsetLeft - mask.offsetWidth*0.5;
+                 var pointY = e.clientY - s_box.offsetParent.offsetTop - mask.offsetHeight*0.5;
+
+                 //边界值处理
+                 if (pointX <= 0){
+                     pointX = 0;
+                 } else if(pointX >= s_box.offsetWidth - mask.offsetWidth){
+                     pointX = s_box.offsetWidth - mask.offsetWidth
+                 }
+                 if (pointY <= 0){
+                     pointY = 0;
+                 } else if(pointY >= s_box.offsetHeight - mask.offsetHeight){
+                     pointY = s_box.offsetHeight - mask.offsetHeight;
+                 }
+
+                 //让放大镜动起来
+                 mask.style.left = pointX + "px";
+                 mask.style.top = pointY + "px" ;
+
+                 //大图移动起来
+                 //   s-X/b-X = s-box.width / 大图宽度
+                 b_img.style.left = - pointX / (s_box.offsetWidth / b_box.offsetWidth) + "px";
+                 b_img.style.top = - pointY/ (s_box.offsetHeight / b_box.offsetHeight) + "px";
+             }
+        };
+
+        //监听小盒子离开
+        s_box.onmouseout = function(){
+            mask.style.display = "none";
+            b_box.style.display = "none";
+        };
+
+        //遍历列表图片
+        for (var i = 0; i < list_img.length; i++){
+            (function(index){
+                var img = list_img[index];
+                img.onmousemove = function(){
+                    s_box.children[0].src = "dist/img/s-"+(index + 1)+".jpg";
+                    b_img.src = "dist/img/b-"+(index + 1)+".jpg";
+                }
+            })(i)
+        }
+    };
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

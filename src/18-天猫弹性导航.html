@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "18" })
+    <style>
+        #box18{
+            position: relative;
+        }
+        ul{
+            position: relative;
+            z-index: 99;
+        }
+        li{
+            float: left;
+            height: 40px;
+            line-height: 40px;
+            width: 120px;
+            text-align: center;
+            font-size: 18px;
+            color: #000;
+            cursor: pointer;
+        }
+        #t-mail{
+            background: #FF8080;
+            width: 120px;
+            height: 40px;
+            position: absolute;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="box18">
+    <span id="t-mail"></span>
+    <ul>
+        <li>大厦大大</li>
+        <li>大厦大的</li>
+        <li class="active">大厦大声</li>
+        <li>大啊大大</li>
+        <li>阿达大大</li>
+        <li>看看大大</li>
+        <li>发的大大</li>
+    </ul>
+</div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+    window.onload = function () {
+        /*
+        * offsetWidth  offsetHeight   内容+内边距+边框.
+        * offsetLeft  offsetTop  相对于有定位的盒子
+        * offsetParent  返回当前对象的父级（带有定位）盒子。
+        * style.left ——只能获取行内   offsetLeft——可以获取到所有的
+        *
+        * */
+        var box = $("box18");
+        var tMail =$("t-mail");
+        // console.log(tMail);
+        var allLi = box.getElementsByTagName("li");
+
+        //记录鼠标点击的位置
+        var beginX = 0;
+        for (var i = 0; i < allLi.length;i++){
+            var li = allLi[i];
+
+            li.onmousemove = function(){
+                end = this.offsetLeft;
+            };
+
+            li.onmousedown = function(){
+                beginX = this.offsetLeft;
+            }
+
+            li.onmouseout = function () {
+                end = beginX;
+            }
+        }
+
+        //缓动动画
+        var begin = 0, end = 0;
+        setInterval(function(){
+            begin = begin + (end - begin) * 0.2;
+            tMail.style.left = begin + "px";
+        },10);
+    };
+    function $(id) {
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

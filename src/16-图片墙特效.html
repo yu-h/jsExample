@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "16" })
+    <style>
+        html,body,#ps{
+            height: 100%;
+            width: 100%;
+        }
+        #ps{
+            position: relative;
+        }
+    </style>
+</head>
+<body id="box16">
+    <ul id="ps"></ul>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 缓动公式：起始值 += （结束值 - 起始值）* 缓动系数；
+        *
+        * */
+        var ps = $("ps");
+
+        for (var i = 0; i < 5; i++){
+            var li = document.createElement("li");
+            ps.appendChild(li);
+
+            var img = document.createElement("img");
+            img.src = "dist/img/"+(i+1)+".jpg";
+            li.appendChild(img);
+        }
+        var allLi = ps.children;
+       var W = document.documentElement.clientWidth-650;
+       var H = document.documentElement.clientHeight-650;
+       for (var i = 0; i < allLi.length; i++){
+           var li = allLi[i];
+
+           var x = Math.random()*W;
+           var y = Math.random()*H;
+           li.style.top = y + "px";
+           li.style.left = x + "px";
+
+           var rand = Math.random()*360;
+           li.style.transform = "rotate("+rand+"deg)";
+
+           li.onclick = function(){
+               for (var i = 0;i < allLi.length;i++ ) {
+                   allLi[i].className = "";
+               }
+               this.className = "active";
+           }
+       }
+
+
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

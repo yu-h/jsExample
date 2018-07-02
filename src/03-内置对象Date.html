@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "03" }) </head>
+<body>
+    <div class="warp" id="warp">
+
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+    window.onload = function(){
+        //常用的内置对象
+        //想用的对象要实例出来
+        /*
+        * 1 window      窗口对象
+        * 2 document    文档对象
+        * 3 Array       数组对象
+        * 4 String      字符串对象
+        * 5 Boolean     布尔对象
+        * 6 Date        日期对象
+        * 7 Error       异常对象
+        * 8 Math        数学对象
+        * 9 Arguments   函数参数对象
+        * 10 Object     基对象
+        * 11 RegExp     正则对象
+        * 12 Number     数值对象
+        * 13 Function   函数构造器对象
+        *
+        * */
+
+
+        var date = new Date();
+        console.log(date.getDate());  //日
+        console.log(date.getDay());   //星期  0-6
+        console.log(date.getFullYear()); //年
+        console.log(date.getMonth()+1);  //月  0-11
+        console.log(date.getHours());  //时
+        console.log(date.getMinutes());  //分
+        console.log(date.getSeconds());  //秒
+        console.log(date.getMilliseconds()); //毫秒
+        console.log(date.getTime());  //1970
+    }
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

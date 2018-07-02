@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "09" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box9">
+            <img id="pic" src="dist/img/ct.jpg" alt="">
+            <div id="top"></div>
+            <div id="bottom"></div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 定时器先清除、，在开启
+        * 定义一个步长
+        * */
+        var box = $("box9")
+        var top = $("top");
+        var bottom = $("bottom");
+        var pic = $("pic");
+        var timer = null;
+        var num = 0;
+        top.onmousemove = function(){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                //步长
+                num -= 5;
+                if (num >= -($("pic").height -300)){
+                    pic.style.top = num + "px";
+                } else {
+                    clearInterval(timer);
+                }
+            },100)
+        };
+       bottom.onmousemove = function(){
+           clearInterval(timer);
+           timer = setInterval(function(){
+               //步长
+               num += 5;
+               if (num <= 0){
+                   pic.style.top = num + "px";
+               } else {
+                   clearInterval(timer);
+               }
+           },100)
+       }
+       box.onmouseout = function(){
+           clearInterval(timer);
+       }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

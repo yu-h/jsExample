@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "02" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box2">
+            <div id="top">
+                <button>3列</button>
+                <button>4列</button>
+                <button>5列</button>
+            </div>
+            <div id="bottom">
+                <div class="box bg-r"></div>
+                <div class="box bg-g"></div>
+                <div class="box bg-b"></div>
+                <div class="box bg-r"></div>
+                <div class="box bg-r"></div>
+                <div class="box bg-b"></div>
+                <div class="box bg-r"></div>
+                <div class="box bg-g"></div>
+                <div class="box bg-r"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+    window.onload = function(){
+        //1、获取需要的标签
+        var btns = document.getElementById("top").children;
+        var bottom = $("bottom");
+        // console.log(bottom);
+        btns[0].onclick = function(){
+            j_flex(3,bottom)
+        }
+    }
+    function j_flex(allCols,parentNode) {
+        var boxW =150, boxH = 200,marginXY = 15;
+        for (var i = 0; i < parentNode.children.length;i++){
+            //当前盒子所在的行和列
+            var row = parseInt(i/allCols);
+            var col = parseInt(i%allCols);
+            // console.log("当前盒子字第"+row+"行，第"+col+"列");
+
+            //定位
+            var currentBox = parentNode.children[i];
+            currentBox.style.position = "absolute";
+            currentBox.style.left = col*(boxW + marginXY) + "px";
+            currentBox.style.top = row * (boxH + marginXY) + "px";
+        }
+    }
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

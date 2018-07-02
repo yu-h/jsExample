@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "15" }) </head>
+<body style="background: #000;" id="box15">
+
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 缓动公式：起始值 += （结束值 - 起始值）* 缓动系数；
+        *
+        * */
+        //1、求出屏幕的尺寸
+       var W = document.documentElement.clientWidth;
+       var H = document.documentElement.clientHeight;
+
+       //2、动态创建星星
+       for (var i = 0; i < 150; i++){
+           var span = document.createElement("span");
+           document.body.appendChild(span);
+
+           var x = parseInt(Math.random()*W);
+           var y = parseInt(Math.random()*H);
+           span.style.left = x + "px";
+           span.style.top = y + "px";
+
+           var scale = Math.random()*1.5;
+           span.style.transform = "scale("+scale+")";
+
+           var time = Math.random()*1.5;
+           span.style.animationDelay = time + "s";
+       }
+
+
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

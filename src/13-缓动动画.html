@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "13" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box11">
+            <button id="btn">开始运动</button>
+            <div id="box11-box"></div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 缓动公式：起始值 += （结束值 - 起始值）* 缓动系数；
+        *
+        * */
+        var timer = null, begin = 0, target = 600;
+        $("btn").onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(function(){
+                begin += (target - begin) * 0.5;
+                if (Math.round(begin) >= target){
+                    begin = target;
+                    clearInterval(timer);
+                }
+                $("box11-box").style.marginLeft = begin + "px";
+            },100)
+        }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

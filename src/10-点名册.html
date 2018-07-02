@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "10" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box10">
+            <button id="start">开始点名</button>
+            <button id="stop">结束点名</button>
+            <div id="name">余昊</div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+        /*
+        * 定时器先清除、，在开启
+        * 定义一个步长
+        * */
+       var timer = null;
+       var arrName = ["余昊","徐亚琴"];
+       $("name").innerText = arrName[0];
+       $("start").onclick = function(){
+           clearInterval(timer);
+           timer = setInterval(function(){
+               var s_index = parseInt(Math.random()*arrName.length);
+               // console.log(s_index);
+               var s_name = arrName[s_index];
+               $("name").innerText = s_name;
+           },10)
+       };
+       $("stop").onclick = function(){
+           clearInterval(timer)
+       }
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head> @include('./header.html', { "title": "08" }) </head>
+<body>
+    <div class="warp" id="warp">
+        <div id="box8">
+            <div id="hour"></div>
+            <div id="min"></div>
+            <div id="second"></div>
+        </div>
+    </div>
+</body>
+<script src="dist/js/lib/jquery/jquery-1.11.3.min.js"></script>
+<script>
+   window.onload = function(){
+       /*
+       * 实现思路：1、统一把时间转换为毫秒，会更加精准。
+       *           2、用将来时间-现在时间=剩余时间。
+       *           3、相同代码统一封装
+       *
+       */
+        var hour = $("hour");
+        var min = $("min");
+        var second = $("second");
+       console.log(hour);
+       //开启定时器
+       setInterval(function(){
+           var date = new Date();
+           var millS = date.getMilliseconds();
+           var s = date.getSeconds() + millS / 1000;
+           var m = date.getMinutes() + s / 60;
+           var h = date.getHours() % 12 + m / 60;
+           console.log(m);
+           //旋转
+           hour.style.transform = "rotate("+h*(360/12)+"deg)";
+           min.style.transform = "rotate("+m*(360/60)+"deg)";
+           second.style.transform = "rotate("+s*(360/60)+"deg)";
+       },10);
+   };
+
+    function $(id){
+        return typeof id === "string" ? document.getElementById(id) : null;
+    }
+</script>
+
+</html>
+
+
+
+
+
+
+
+
+
